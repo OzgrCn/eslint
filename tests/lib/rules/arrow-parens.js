@@ -37,9 +37,9 @@ var valid = [
 
 ];
 
-var message = message;
-var asNeededMessage = asNeededMessage;
-var type = type;
+var message;
+var asNeededMessage;
+var type;
 
 var invalid = [
     {

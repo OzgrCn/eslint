@@ -27,7 +27,9 @@ ruleTester.run("no-use-before-define", rule, {
         { code: "a(); function a() { alert(arguments); }", options: [ "nofunc"] },
         { code: "(() => { var a = 42; alert(a); })();", ecmaFeatures: { arrowFunctions: true } },
         { code: "a(); try { throw new Error() } catch (a) {}" },
-
+        { code: "function f(a) {a += a}" },
+        { code: "var a; a = a" },
+        { code: "var a = 1; a = a + 1" },
         // Block-level bindings
         { code: "\"use strict\"; a(); { function a() {} }", ecmaFeatures: { blockBindings: true } },
         { code: "\"use strict\"; { a(); function a() {} }", options: ["nofunc"], ecmaFeatures: { blockBindings: true } },
@@ -35,6 +37,8 @@ ruleTester.run("no-use-before-define", rule, {
         { code: "a(); { let a = function () {}; }", ecmaFeatures: { blockBindings: true } }
     ],
     invalid: [
+        { code: "var a = a;", ecmaFeatures: { modules: true }, errors: [{ message: "\"a\" was used before it was defined", type: "Identifier"}] },
+        { code: "var a = a + 1;", ecmaFeatures: { modules: true }, errors: [{ message: "\"a\" was used before it was defined", type: "Identifier"}] },
         { code: "a++; var a=19;", ecmaFeatures: { modules: true }, errors: [{ message: "\"a\" was used before it was defined", type: "Identifier"}] },
         { code: "a++; var a=19;", ecmaFeatures: { globalReturn: true }, errors: [{ message: "\"a\" was used before it was defined", type: "Identifier"}] },
         { code: "a++; var a=19;", errors: [{ message: "\"a\" was used before it was defined", type: "Identifier"}] },
