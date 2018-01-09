@@ -1,4 +1,4 @@
-v1.8.0 - October 30, 2015
+v1.8.0 - October 30, 2015.1
 
 * Fix: Check for node property before testing type (fixes #4298) (Ian VanSchooten)
 * Docs: Specify 'double' as default for quotes (fixes #4270) (Ian VanSchooten)
